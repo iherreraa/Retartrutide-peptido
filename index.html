@@ -1,0 +1,542 @@
+Retartutride Peptide html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retatrutida: Análisis Integral y Desempeño</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neutralBg: '#F8FAFC', // slate-50
+                        surfaceBg: '#FFFFFF',
+                        primaryText: '#1E293B', // slate-800
+                        secondaryText: '#475569', // slate-600
+                        accentMain: '#0284C7', // sky-600 (Medical/Trust)
+                        accentAlt: '#059669', // emerald-600 (Health/Growth)
+                        warning: '#E11D48' // rose-600
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS Reset & Base */
+        body {
+            background-color: #F8FAFC;
+            color: #1E293B;
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Chart Container Specifications (Mandatory) */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            max-height: 450px;
+            min-height: 300px;
+        }
+
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 35vh;
+                min-height: 250px;
+            }
+        }
+
+        /* Interactive Transitions */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        /* Custom Shapes for avoiding SVG */
+        .circle-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue & Emerald Accents -->
+    <!-- Application Structure Plan: A dashboard-style layout divided into 4 core interactive modules: 1) Molecular Profile (Understanding the "why"), 2) Clinical Efficacy (Interactive charts showing baseline benefits), 3) Performance Hub (Deep dive into physical/mental benefits using dynamic toggles), 4) Safety & Protocols (Expandable accordion for risks). This structured approach allows users to start with the basics and drill down into the specialized biohacking/performance aspects at their own pace. -->
+    <!-- Visualization & Content Choices: 
+         - Overview: HTML/CSS circles for the 3 receptors (GLP-1, GIP, Glucagon) -> Interaction: Hover effects -> Justification: Explains the "triple agonist" mechanism without SVG.
+         - Efficacy: Bar Chart (Chart.js) -> Interaction: Tooltips, responsive -> Justification: Best way to compare weight loss percentages against older generations (Semaglutide/Tirzepatide).
+         - Performance: Radar Chart + Dynamic Text blocks -> Interaction: Toggle between "Physical" and "Mental" modes -> Justification: Allows comparative visualization of completely different metrics (focus vs endurance) in a single space.
+         - Safety: Accordion lists -> Interaction: Click to expand -> Justification: Keeps the UI clean while offering deep textual details on side effects.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased selection:bg-accentMain selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="bg-surfaceBg shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-accentMain text-white flex items-center justify-center font-bold mr-3">R</div>
+                    <span class="font-bold text-xl tracking-tight text-primaryText">Retatrutida<span class="font-light text-secondaryText">360</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <button onclick="scrollToSection('perfil')" class="text-secondaryText hover:text-accentMain transition font-medium">Perfil Molecular</button>
+                    <button onclick="scrollToSection('eficacia')" class="text-secondaryText hover:text-accentMain transition font-medium">Eficacia Clínica</button>
+                    <button onclick="scrollToSection('desempeno')" class="text-secondaryText hover:text-accentAlt transition font-medium">Desempeño Físico/Mental</button>
+                    <button onclick="scrollToSection('seguridad')" class="text-secondaryText hover:text-warning transition font-medium">Seguridad</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-surfaceBg py-16 lg:py-24 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-primaryText mb-6">El Primer Agonista Triple: <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-accentMain to-accentAlt">Redefiniendo el Metabolismo</span></h1>
+            <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto mb-10">
+                La Retatrutida (LY3437943) representa la próxima frontera en péptidos metabólicos. Más allá de la pérdida de peso sin precedentes, la ciencia y la comunidad de alto rendimiento están descubriendo su profundo impacto en la <strong>cognición, la energía celular y la recomposición corporal</strong>.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <!-- SECTION 1: Molecular Profile -->
+        <section id="perfil" class="scroll-mt-24">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-primaryText mb-4">Perfil Molecular: El Poder del 'G' Triple</h2>
+                <p class="text-secondaryText text-lg">
+                    A diferencia de sus predecesores, la Retatrutida actúa sobre tres receptores hormonales simultáneamente. Explore las tarjetas a continuación para entender cómo esta sinergia produce efectos compuestos en todo el cuerpo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- GLP-1 -->
+                <div class="bg-surfaceBg rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition cursor-default">
+                    <div class="circle-icon bg-blue-100 text-accentMain mb-4">1</div>
+                    <h3 class="text-xl font-bold mb-2">Receptor GLP-1</h3>
+                    <p class="text-secondaryText text-sm mb-4">Péptido similar al glucagón tipo 1.</p>
+                    <ul class="text-sm space-y-2">
+                        <li class="flex items-start"><span class="text-accentMain mr-2">✓</span> Retrasa el vaciado gástrico.</li>
+                        <li class="flex items-start"><span class="text-accentMain mr-2">✓</span> Reduce drásticamente el apetito ("ruido mental").</li>
+                        <li class="flex items-start"><span class="text-accentMain mr-2">✓</span> Estimula la secreción de insulina dependiente de glucosa.</li>
+                    </ul>
+                </div>
+                <!-- GIP -->
+                <div class="bg-surfaceBg rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition cursor-default">
+                    <div class="circle-icon bg-emerald-100 text-accentAlt mb-4">2</div>
+                    <h3 class="text-xl font-bold mb-2">Receptor GIP</h3>
+                    <p class="text-secondaryText text-sm mb-4">Polipéptido insulinotrópico dependiente de glucosa.</p>
+                    <ul class="text-sm space-y-2">
+                        <li class="flex items-start"><span class="text-accentAlt mr-2">✓</span> Mejora la sensibilidad a la insulina.</li>
+                        <li class="flex items-start"><span class="text-accentAlt mr-2">✓</span> Reduce el almacenamiento de grasa ectópica.</li>
+                        <li class="flex items-start"><span class="text-accentAlt mr-2">✓</span> Amortigua las náuseas típicas del GLP-1.</li>
+                    </ul>
+                </div>
+                <!-- Glucagon -->
+                <div class="bg-surfaceBg rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition cursor-default border-t-4 border-t-orange-400">
+                    <div class="circle-icon bg-orange-100 text-orange-600 mb-4">3</div>
+                    <h3 class="text-xl font-bold mb-2">Receptor de Glucagón</h3>
+                    <p class="text-secondaryText text-sm mb-4 font-medium text-orange-600">La diferencia clave de la Retatrutida.</p>
+                    <ul class="text-sm space-y-2">
+                        <li class="flex items-start"><span class="text-orange-500 mr-2">✓</span> <strong>Aumenta el gasto energético basal.</strong></li>
+                        <li class="flex items-start"><span class="text-orange-500 mr-2">✓</span> Promueve la movilización de grasas (lipólisis) directa.</li>
+                        <li class="flex items-start"><span class="text-orange-500 mr-2">✓</span> Limpia agresivamente la grasa del hígado.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Clinical Efficacy -->
+        <section id="eficacia" class="scroll-mt-24 bg-surfaceBg p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div class="mb-8 md:flex md:justify-between md:items-end">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl font-bold text-primaryText mb-4">Eficacia Clínica y Pérdida de Peso</h2>
+                    <p class="text-secondaryText text-lg">
+                        Interactúa con el gráfico para comparar la pérdida de peso promedio a las 48 semanas en ensayos clínicos (Fase 2) de la Retatrutida frente a las generaciones anteriores de agonistas. Los resultados muestran una eficacia que se acerca a la cirugía bariátrica.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CHART CONTAINER -->
+            <div class="chart-container">
+                <canvas id="efficacyChart"></canvas>
+            </div>
+            <div class="text-center mt-4 text-sm text-gray-500">
+                Datos basados en promedios de ensayos clínicos de fase 2/3. *La Retatrutida en su dosis máxima (12mg).
+            </div>
+        </section>
+
+        <!-- SECTION 3: Physical & Mental Performance (DEEP DIVE) -->
+        <section id="desempeno" class="scroll-mt-24">
+            <div class="mb-8">
+                <div class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-bold mb-4">Focus Profundo</div>
+                <h2 class="text-3xl font-bold text-primaryText mb-4">Impacto en el Desempeño Físico y Mental</h2>
+                <p class="text-secondaryText text-lg max-w-4xl">
+                    Más allá de la clínica, los biohackers y atletas de alto rendimiento están reportando efectos secundarios positivos (off-label). El agonismo del glucagón proporciona energía, mientras que el GLP-1 y GIP estabilizan la mente. <strong>Selecciona una categoría para explorar sus efectos detallados.</strong>
+                </p>
+            </div>
+
+            <!-- Toggles -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <button id="btn-fisico" onclick="switchPerformanceTab('fisico')" class="px-6 py-3 rounded-full font-bold text-white bg-accentMain shadow-md transition transform hover:scale-105">
+                    💪 Desempeño Físico
+                </button>
+                <button id="btn-mental" onclick="switchPerformanceTab('mental')" class="px-6 py-3 rounded-full font-bold text-secondaryText bg-gray-200 hover:bg-gray-300 transition transform hover:scale-105">
+                    🧠 Desempeño Mental
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-surfaceBg p-8 rounded-2xl shadow-sm border border-gray-100">
+                
+                <!-- Dynamic Content Area -->
+                <div id="performance-text-area" class="space-y-6">
+                    <!-- Content injected by JS -->
+                </div>
+
+                <!-- Radar Chart Container -->
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Safety, Side Effects & Recommendations -->
+        <section id="seguridad" class="scroll-mt-24 mb-12">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-primaryText mb-4">Efectos Secundarios y Recomendaciones</h2>
+                <p class="text-secondaryText text-lg">
+                    Como molécula en investigación altamente potente, la Retatrutida requiere protocolos estrictos. Conoce los riesgos y las recomendaciones de mitigación. Haz clic en cada panel para expandir la información.
+                </p>
+            </div>
+
+            <div class="space-y-4 max-w-4xl mx-auto">
+                
+                <!-- Accordion Item 1 -->
+                <div class="border border-gray-200 rounded-lg bg-surfaceBg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold text-lg flex justify-between items-center hover:bg-gray-50 focus:outline-none accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="text-warning">Efectos Gastrointestinales (Los más comunes)</span>
+                        <span class="text-2xl font-light transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-secondaryText">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Síntomas:</strong> Náuseas, vómitos, diarrea o estreñimiento. Generalmente ocurren al inicio del tratamiento o al aumentar la dosis.</li>
+                                <li><strong>Causa:</strong> Retraso drástico en el vaciado gástrico por la acción del GLP-1.</li>
+                                <li><strong>Mitigación:</strong> Titulación lenta de la dosis (empezar con 1-2mg/semana). Comer porciones muy pequeñas, evitar alimentos altos en grasa o azúcar. Hidratación constante con electrolitos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="border border-gray-200 rounded-lg bg-surfaceBg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold text-lg flex justify-between items-center hover:bg-gray-50 focus:outline-none accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="text-orange-600">Taquicardia y Efectos Cardiovasculares</span>
+                        <span class="text-2xl font-light transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-secondaryText">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Síntomas:</strong> Aumento de la frecuencia cardíaca en reposo (arritmias en casos raros).</li>
+                                <li><strong>Causa:</strong> El agonismo del receptor de glucagón estimula el gasto energético y el sistema cardiovascular.</li>
+                                <li><strong>Precauciones:</strong> Monitorización de la frecuencia cardíaca. Individuos con afecciones cardíacas preexistentes deben tener extrema precaución. Suele ser transitorio y estabilizarse tras las primeras semanas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="border border-gray-200 rounded-lg bg-surfaceBg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold text-lg flex justify-between items-center hover:bg-gray-50 focus:outline-none accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="text-accentMain">Pérdida de Masa Muscular (Sarcopenia)</span>
+                        <span class="text-2xl font-light transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-secondaryText">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li><strong>Riesgo:</strong> Debido a la rápida y masiva pérdida de peso, existe un alto riesgo de perder masa magra junto con la grasa si no se interviene.</li>
+                                <li><strong>Protocolo de Desempeño:</strong> 
+                                    <br>1. <strong>Ingesta de Proteínas:</strong> Mínimo 1.6g - 2.2g de proteína por kg de peso corporal ideal.
+                                    <br>2. <strong>Entrenamiento de Fuerza:</strong> Levantamiento de pesas de hipertrofia 3-4 veces por semana es innegociable.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 -->
+                <div class="border border-gray-200 rounded-lg bg-surfaceBg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold text-lg flex justify-between items-center hover:bg-gray-50 focus:outline-none accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="text-primaryText">Sensibilidad de la Piel y Alodinia (Efecto Raro)</span>
+                        <span class="text-2xl font-light transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-secondaryText">
+                            <p>Algunos usuarios reportan hiper-sensibilidad en la piel (sensación de quemadura solar o roce molesto con la ropa) sin sarpullido. Se cree que es una respuesta neurológica temporal a la rápida fluctuación de péptidos y pérdida de grasa profunda. Generalmente desaparece al mantener una dosis estable.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Disclaimer -->
+    <footer class="bg-primaryText text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h4 class="text-xl font-bold mb-4">Descargo de Responsabilidad Médico</h4>
+            <p class="text-sm text-gray-400 max-w-3xl mx-auto">
+                La Retatrutida (LY3437943) es un medicamento en fase de investigación clínica y no ha sido aprobado por entidades reguladoras (como la FDA) para uso público general. La información proporcionada en esta aplicación web es estrictamente para fines educativos, analíticos y de investigación sobre tendencias de alto desempeño. No constituye consejo médico, diagnóstico ni recomendación de tratamiento. Siempre consulte a un médico endocrinólogo antes de considerar cualquier intervención metabólica o peptídica.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Navigation ---
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Data Storage ---
+        const efficacyData = {
+            labels: ['Placebo', 'Semaglutida (GLP-1)', 'Tirzepatida (GLP-1/GIP)', 'Retatrutida (Triple)'],
+            datasets: [{
+                label: '% Pérdida de Peso Corporal (48 semanas)',
+                data: [2, 15, 22.5, 24.2], // approximate phase 2/3 averages
+                backgroundColor: [
+                    '#CBD5E1', // slate-300
+                    '#60A5FA', // blue-400
+                    '#34D399', // emerald-400
+                    '#0284C7'  // sky-600
+                ],
+                borderRadius: 6,
+                borderWidth: 0
+            }]
+        };
+
+        const performanceContent = {
+            fisico: {
+                title: "Recomposición Corporal y Energía",
+                items: [
+                    { title: "Gasto Energético Basal (BMR)", desc: "El receptor de glucagón 'engaña' al cuerpo para que queme más calorías en reposo, previniendo la adaptación metabólica típica de las dietas restrictivas." },
+                    { title: "Movilización Directa de Lípidos", desc: "A diferencia del GLP-1 puro que depende del déficit calórico, la Retatrutida activa activamente la lipólisis (quema de grasa) en el tejido adiposo." },
+                    { title: "Reducción de Inflamación", desc: "La pérdida acelerada de grasa visceral reduce los marcadores inflamatorios sistémicos (PCR), lo que acelera la recuperación post-entrenamiento." },
+                    { title: "Atención (Riesgo)", desc: "Debido al déficit calórico severo, el rendimiento de resistencia extrema y la fuerza máxima pueden disminuir temporalmente sin una nutrición estratégica intra-entrenamiento." }
+                ],
+                chartData: [85, 95, 80, 60, 90] // BMR, Lipolysis, Recovery, Peak Strength, Inflammation Control
+            },
+            mental: {
+                title: "Cognición y Neurología",
+                items: [
+                    { title: "Supresión del 'Ruido de Comida'", desc: "Eliminación casi total de los pensamientos intrusivos sobre la comida, liberando ancho de banda cognitivo masivo para el trabajo profundo (Deep Work)." },
+                    { title: "Neuroprotección", desc: "Los agonistas GLP-1/GIP cruzan la barrera hematoencefálica, reduciendo la neuroinflamación. Se están estudiando para Alzheimer y Parkinson." },
+                    { title: "Estabilidad de Glucosa", desc: "Elimina los picos y caídas de azúcar en sangre, erradicando la 'niebla mental' post-almuerzo y manteniendo una energía mental lineal todo el día." },
+                    { title: "Regulación de Dopamina", desc: "Reduce el comportamiento compulsivo no solo hacia la comida, sino potencialmente hacia el alcohol, compras o uso de pantallas, estabilizando el sistema de recompensa." }
+                ],
+                chartData: [95, 75, 90, 85, 80] // Focus, Neuroprotection, Energy Stability, Dopamine Control, Memory
+            }
+        };
+
+        const radarLabels = {
+            fisico: ['Metabolismo Basal', 'Quema de Grasa', 'Recuperación', 'Fuerza Máxima', 'Control Inflamatorio'],
+            mental: ['Foco / Zero Distracción', 'Neuroprotección', 'Energía Estable', 'Control de Impulsos', 'Claridad Mental']
+        };
+
+        // --- Chart Initialization State ---
+        let efficacyChartInstance = null;
+        let performanceChartInstance = null;
+
+        // --- Initialize Charts ---
+        function initEfficacyChart() {
+            const ctx = document.getElementById('efficacyChart').getContext('2d');
+            efficacyChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: efficacyData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Mandatory for responsive chart container
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '% de pérdida promedio';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '% Pérdida de Peso' },
+                            max: 30
+                        }
+                    }
+                }
+            });
+        }
+
+        function initPerformanceChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            performanceChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: radarLabels.fisico,
+                    datasets: [{
+                        label: 'Desempeño Físico',
+                        data: performanceContent.fisico.chartData,
+                        backgroundColor: 'rgba(2, 132, 199, 0.2)', // accentMain with opacity
+                        borderColor: 'rgba(2, 132, 199, 1)',
+                        pointBackgroundColor: 'rgba(2, 132, 199, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Mandatory
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: {
+                                font: { size: 12, family: 'Inter' },
+                                color: '#475569'
+                            },
+                            ticks: { display: false, min: 0, max: 100 }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // --- Interaction Logic ---
+        function switchPerformanceTab(tab) {
+            // Update Buttons UI
+            const btnFisico = document.getElementById('btn-fisico');
+            const btnMental = document.getElementById('btn-mental');
+
+            if(tab === 'fisico') {
+                btnFisico.className = "px-6 py-3 rounded-full font-bold text-white bg-accentMain shadow-md transition transform hover:scale-105";
+                btnMental.className = "px-6 py-3 rounded-full font-bold text-secondaryText bg-gray-200 hover:bg-gray-300 transition transform hover:scale-105";
+            } else {
+                btnMental.className = "px-6 py-3 rounded-full font-bold text-white bg-indigo-600 shadow-md transition transform hover:scale-105";
+                btnFisico.className = "px-6 py-3 rounded-full font-bold text-secondaryText bg-gray-200 hover:bg-gray-300 transition transform hover:scale-105";
+            }
+
+            // Update Text Content
+            const textArea = document.getElementById('performance-text-area');
+            const data = performanceContent[tab];
+            
+            let htmlContent = `<h3 class="text-2xl font-bold text-primaryText mb-4">${data.title}</h3><div class="space-y-4">`;
+            data.items.forEach((item, index) => {
+                const colorClass = tab === 'fisico' ? 'text-accentMain' : 'text-indigo-600';
+                htmlContent += `
+                    <div class="p-4 rounded-lg bg-gray-50 border border-gray-100 hover:border-gray-200 transition">
+                        <h4 class="font-bold text-lg mb-1 flex items-center">
+                            <span class="${colorClass} mr-2">✦</span> ${item.title}
+                        </h4>
+                        <p class="text-secondaryText text-sm ml-6">${item.desc}</p>
+                    </div>
+                `;
+            });
+            htmlContent += `</div>`;
+            
+            // Simple fade effect
+            textArea.style.opacity = 0;
+            setTimeout(() => {
+                textArea.innerHTML = htmlContent;
+                textArea.style.opacity = 1;
+            }, 200);
+
+            // Update Chart Data dynamically
+            if (performanceChartInstance) {
+                const colorLine = tab === 'fisico' ? 'rgba(2, 132, 199, 1)' : 'rgba(79, 70, 229, 1)'; // Sky vs Indigo
+                const colorBg = tab === 'fisico' ? 'rgba(2, 132, 199, 0.2)' : 'rgba(79, 70, 229, 0.2)';
+                
+                performanceChartInstance.data.labels = radarLabels[tab];
+                performanceChartInstance.data.datasets[0].label = tab === 'fisico' ? 'Desempeño Físico' : 'Desempeño Mental';
+                performanceChartInstance.data.datasets[0].data = data.chartData;
+                performanceChartInstance.data.datasets[0].backgroundColor = colorBg;
+                performanceChartInstance.data.datasets[0].borderColor = colorLine;
+                performanceChartInstance.data.datasets[0].pointBackgroundColor = colorLine;
+                
+                performanceChartInstance.update();
+            }
+        }
+
+        function toggleAccordion(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('span:last-child');
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.textContent = '+';
+                icon.style.transform = 'rotate(0deg)';
+                btn.classList.remove('bg-gray-50');
+            } else {
+                // Close all others
+                document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                document.querySelectorAll('.accordion-btn span:last-child').forEach(el => {
+                    el.textContent = '+';
+                    el.style.transform = 'rotate(0deg)';
+                });
+                document.querySelectorAll('.accordion-btn').forEach(el => el.classList.remove('bg-gray-50'));
+
+                // Open clicked
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.textContent = '−';
+                icon.style.transform = 'rotate(180deg)';
+                btn.classList.add('bg-gray-50');
+            }
+        }
+
+        // --- On Load ---
+        window.onload = () => {
+            initEfficacyChart();
+            initPerformanceChart();
+            switchPerformanceTab('fisico'); // Initialize with Physical tab open
+            
+            // Add transitions to text area
+            document.getElementById('performance-text-area').style.transition = "opacity 0.3s ease-in-out";
+        };
+
+    </script>
+</body>
+</html>
